@@ -99,7 +99,6 @@
 
                 <div class="col-md-6">
 	                <div class="form-group">
-	                	<label for="emailaddress">Email Address</label>
 	                  <input name="price" type="hidden" value="{{Session::get('price')}}" class="form-control" placeholder="">
 	                </div>
                 </div>

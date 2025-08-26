@@ -21,10 +21,10 @@
     </section>
 
     <div class="container">
-    @if(Session::has('deleted'))
-        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('deleted') }}</p>
-    @endif
-</div>
+        @if(Session::has('deleted'))
+            <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('deleted') }}</p>
+        @endif
+    </div>
 		<section class="ftco-section ftco-cart">
 	<div class="container-fluid">
 		<div class="row">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product\Product;
+use App\Models\Product\Review;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,17 @@ class HomeController extends Controller
     public function index()
     {
         $products=Product::select()->orderBy('id' , 'desc')->take('4')->get();
+        $reviews= Review::select()->orderBy('id' , 'desc')->take('4')->get();
+        return view('home',compact('products' , 'reviews'));
+    }
 
-        return view('home',compact('products'));
+    public function services(){
+        return view('pages.services');
+    }
+    public function about(){
+        return view('pages.about');
+    }
+    public function contact(){
+        return view('pages.contact');
     }
 }

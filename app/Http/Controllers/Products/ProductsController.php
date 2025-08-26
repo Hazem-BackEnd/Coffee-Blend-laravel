@@ -22,13 +22,16 @@ class ProductsController extends Controller
         ->where('id' , '!=' , $id)->take('4')
         ->orderBy('id' , 'desc')
         ->get();
+        if(isset(Auth::user()->id)){
 
-        //checking for products in cart
-
-        $checkingInCart=Cart::where('pro_id',$id)->where('user_id',Auth::user()->id)
+        $checkingInCart=Cart::where('pro_id',$id)
+        ->where('user_id',Auth::user()->id)
         ->count();
-
         return view('products.productsingle',compact('product','relatedProducts' , 'checkingInCart'));
+        }
+        else{
+        return view('products.productsingle',compact('product','relatedProducts'));
+        }
     }
 
     public function addCart(Request $request, $id) {

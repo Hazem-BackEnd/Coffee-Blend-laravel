@@ -34,6 +34,7 @@
                                 <th>Email</th>
                                 <th>Price</th>
                                 <th>Status</th>
+                                <th>Review</th>
 						      </tr>
 						    </thead>
 						    <tbody>
@@ -56,8 +57,14 @@
 									{{$order->email}}
 					            </td>
 						        <td class="total">${{$order->price}}</td>
-						        <td class="total">${{$order->status}}</td>
-
+						        <td class="total">{{$order->status}}</td>
+                                <td>
+                                    @if($order->status == "Delivered")
+                                        <a class="btn btn-primary" href="{{route('write.reviews')}}">Write review</a>
+                                    @else
+                                        <button class="btn btn-dark" disabled href="#">Write review</button>
+                                    @endif
+                                </td>
                                 @endforeach
 
                                 @else
