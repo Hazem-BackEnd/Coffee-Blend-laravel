@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
@@ -34,3 +36,26 @@ Route::get('users/bookings', [App\Http\Controllers\Users\UsersController::class,
 // write reviews
 Route::get('users/write-reviews', [App\Http\Controllers\Users\UsersController::class, 'writeReviews'])->name('write.reviews')->middleware('auth:web');
 Route::post('users/write-reviews', [App\Http\Controllers\Users\UsersController::class, 'proccessWriteReviews'])->name('proccess.write.reviews')->middleware('auth:web');
+
+Route::get( 'admin/login', [App\Http\Controllers\Admins\AdminsController::class, 'viewLogin'])->name('view.login')->middleware('check.for.auth');
+Route::post( 'admin/login', [App\Http\Controllers\Admins\AdminsController::class, 'checkLogin'])->name('check.login');
+
+Route::get( 'admin/index', [App\Http\Controllers\Admins\AdminsController::class, 'index'])->name('admins.dashboard')->middleware('auth:admin');
+Route::get( 'admin/all-admins', [App\Http\Controllers\Admins\AdminsController::class, 'DisplayAllAdmins'])->name('all.admins')->middleware('auth:admin');
+Route::get( 'admin/create-admins', [App\Http\Controllers\Admins\AdminsController::class, 'createAdmins'])->name('create.admins')->middleware('auth:admin');
+Route::post( 'admin/create-admins', [App\Http\Controllers\Admins\AdminsController::class, 'storeAdmins'])->name('store.admins')->middleware('auth:admin');
+
+Route::get( 'admin/all-orders', [App\Http\Controllers\Admins\AdminsController::class, 'DisplayAllOrders'])->name('all.orders')->middleware('auth:admin');
+Route::get( 'edit/orders/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'editOrder'])->name('edit.order')->middleware('auth:admin');
+Route::post( 'edit/orders/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'updateOrder'])->name('update.order')->middleware('auth:admin');
+
+Route::get( 'delete/orders/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'deleteOrder'])->name('delete.order')->middleware('auth:admin');
+
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/admin/login');
+})->name('logout');
+//Route::get('users/write-reviews', [App\Http\Controllers\Users\UsersController::class, 'writeReviews'])->name('write.reviews')->middleware('auth:web');

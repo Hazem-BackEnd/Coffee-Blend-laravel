@@ -12,6 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
     $middleware->alias([
+        'check.for.auth' =>\App\Http\Middleware\CheckForAuth::class,
         'check.for.price' => \App\Http\Middleware\CheckForPrice::class,
     ]);
 })
