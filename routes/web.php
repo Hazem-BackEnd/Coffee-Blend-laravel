@@ -48,8 +48,17 @@ Route::post( 'admin/create-admins', [App\Http\Controllers\Admins\AdminsControlle
 Route::get( 'admin/all-orders', [App\Http\Controllers\Admins\AdminsController::class, 'DisplayAllOrders'])->name('all.orders')->middleware('auth:admin');
 Route::get( 'edit/orders/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'editOrder'])->name('edit.order')->middleware('auth:admin');
 Route::post( 'edit/orders/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'updateOrder'])->name('update.order')->middleware('auth:admin');
-
 Route::get( 'delete/orders/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'deleteOrder'])->name('delete.order')->middleware('auth:admin');
+
+Route::get( 'all-products', [App\Http\Controllers\Admins\AdminsController::class, 'DisplayAllProducts'])->name('all.products')->middleware('auth:admin');
+Route::get( 'delete/products/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'deleteProduct'])->name('delete.product')->middleware('auth:admin');
+Route::get( 'create-products', [App\Http\Controllers\Admins\AdminsController::class, 'createProducts'])->name('create.products')->middleware('auth:admin');
+Route::post( 'create-products', [App\Http\Controllers\Admins\AdminsController::class, 'storeProducts'])->name('store.products')->middleware('auth:admin');
+
+Route::get( 'all-bookings', [App\Http\Controllers\Admins\AdminsController::class, 'DisplayAllBookings'])->name('all.bookings')->middleware('auth:admin');
+Route::get( 'delete-bookings/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'deleteBooking'])->name('delete.booking')->middleware('auth:admin');
+Route::get( 'edit/bookings/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'editBooking'])->name('edit.booking')->middleware('auth:admin');
+Route::post( 'edit/bookings/{id}', [App\Http\Controllers\Admins\AdminsController::class, 'updateBooking'])->name('update.booking')->middleware('auth:admin');
 
 
 Route::post('/logout', function () {

@@ -18,6 +18,7 @@ class Booking extends Model
         "time",
         "phone",
         "message",
+        "status",
         "user_id"
     ];
 
